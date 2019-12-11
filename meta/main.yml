@@ -14,11 +14,12 @@ galaxy_info:
   platforms:
     - name: CentOS
       versions:
+        - 8
         - 7
-    - name: Ubuntu
-      versions:
-        - xenial
-        - bionic
+#    - name: Ubuntu
+#      versions:
+#        - xenial
+#        - bionic
 
   galaxy_tags:
     - molecule
