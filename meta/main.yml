@@ -11,14 +11,14 @@ galaxy_info:
 
   github_branch: master
 
-    platforms:
-      - name: CentOS
-        versions:
-          - 7
-      - name: Ubuntu
-        versions:
-          - xenial
-          - bionic
+  platforms:
+    - name: CentOS
+      versions:
+        - 7
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
 
   galaxy_tags:
     - molecule
