@@ -1,0 +1,30 @@
+---
+language: python
+services: docker
+
+env:
+  global:
+    - ROLE_NAME: molecule-sandbox
+  matrix:
+    - MOLECULE_DISTRO: centos:8
+    - MOLECULE_DISTRO: centos:7
+#    - MOLECULE_DISTRO: ubuntu:eoan
+#    - MOLECULE_DISTRO: ubuntu:bionic
+#    - MOLECULE_DISTRO: ubuntu:xenial
+#    - MOLECULE_DISTRO: debian:10
+#    - MOLECULE_DISTRO: debian:9
+#    - MOLECULE_DISTRO: debian:8
+
+install:
+  - pip install molecule docker
+
+before_script:
+  - cd ../
+  - mv ansible-role-$ROLE_NAME deekayen.$ROLE_NAME
+  - cd deekayen.$ROLE_NAME
+
+script:
+  - molecule test
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

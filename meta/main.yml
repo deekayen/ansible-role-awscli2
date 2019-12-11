@@ -1,0 +1,26 @@
+---
+galaxy_info:
+  author: David Norman
+  description: Learn how to use Molecule with Ansible to do test driven development of new roles.
+
+  issue_tracker_url: https://github.com/deekayen/ansible-role-molecule-sandbox/issues
+
+  license: BSD
+
+  min_ansible_version: 1.2
+
+  github_branch: master
+
+    platforms:
+      - name: CentOS
+        versions:
+          - 7
+      - name: Ubuntu
+        versions:
+          - xenial
+          - bionic
+
+  galaxy_tags:
+    - molecule
+
+dependencies: []
