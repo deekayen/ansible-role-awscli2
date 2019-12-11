@@ -13,7 +13,7 @@ galaxy_info:
   github_branch: master
 
   platforms:
-    - name: CentOS
+    - name: EL
       versions:
         - 8
         - 7
