@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: molecule-sandbox
   author: David Norman
   description: Learn how to use Molecule with Ansible to do test driven development of new roles.
 
@@ -16,12 +17,9 @@ galaxy_info:
       versions:
         - 8
         - 7
-#    - name: Ubuntu
-#      versions:
-#        - xenial
-#        - bionic
 
   galaxy_tags:
     - molecule
 
-dependencies: []
+dependencies:
+  - deekayen.sponsor
