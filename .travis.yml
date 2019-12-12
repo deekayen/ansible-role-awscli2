@@ -8,12 +8,12 @@ env:
   global:
     - ROLE_NAME: molecule_sandbox
   matrix:
-    - MOLECULE_DISTRO: centos:7
-#    - MOLECULE_DISTRO: ubuntu:bionic
+    - MOLECULE_DISTRO: ubuntu:eoan
+    - MOLECULE_DISTRO: ubuntu:bionic
+    - MOLECULE_DISTRO: ubuntu:xenial
+#    - MOLECULE_DISTRO: centos:7
 #    - MOLECULE_DISTRO: debian:10
 #    - MOLECULE_DISTRO: centos:8
-#    - MOLECULE_DISTRO: ubuntu:eoan
-#    - MOLECULE_DISTRO: ubuntu:xenial
 #    - MOLECULE_DISTRO: debian:9
 #    - MOLECULE_DISTRO: debian:8
 

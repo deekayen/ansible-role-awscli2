@@ -1,7 +1,7 @@
 ---
 
-- name: start httpd
+- name: start apache2
   service:
-    name: httpd
+    name: apache2
     enabled: yes
     state: started

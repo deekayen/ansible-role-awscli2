@@ -13,10 +13,11 @@ galaxy_info:
   github_branch: master
 
   platforms:
-    - name: EL
+    - name: Ubuntu
       versions:
-        - 8
-        - 7
+        - bionic
+        - xenial
+        - eoan
 
   galaxy_tags:
     - molecule

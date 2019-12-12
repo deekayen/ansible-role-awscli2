@@ -1,6 +1,6 @@
 ---
 
-- name: Install httpd.
+- name: Install apache2.
   package:
-    name: httpd
-  notify: start httpd
+    name: apache2
+  notify: start apache2
