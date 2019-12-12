@@ -40,8 +40,7 @@ def test_apache2_service(host):
 
 
 def test_apache2_connection(host):
-    print(host)
-    request = urllib.urlopen(host)
+    request = urllib.request.urlopen(host)
     code = request.getcode()
-    print(code)
+
     assert code == "200"
