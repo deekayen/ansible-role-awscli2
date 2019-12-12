@@ -1,7 +1,7 @@
 ---
 
-- name: start nginx
+- name: start httpd
   service:
-    name: nginx
+    name: httpd
     enabled: yes
     state: started
