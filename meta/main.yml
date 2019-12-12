@@ -20,7 +20,6 @@ galaxy_info:
         - jessie
     - name: Ubuntu
       versions:
-        - eoan
         - bionic
         - xenial
         - trusty
