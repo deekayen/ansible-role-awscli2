@@ -15,9 +15,9 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - 10
-        - 9
-        - 8
+        - buster
+        - stretch
+        - jessie
     - name: Ubuntu
       versions:
         - eoan
