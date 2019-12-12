@@ -4,11 +4,3 @@
   package:
     name: apache2
   notify: start apache2
-
-- debug:
-    msg:
-      - "****************************************"
-      - "| Sponsor deekayen to maintain this    |"
-      - "| role and others like it at           |"
-      - "| https://github.com/sponsors/deekayen |"
-      - "****************************************"
