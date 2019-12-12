@@ -4,7 +4,7 @@ services: docker
 
 env:
   global:
-    - ROLE_NAME: molecule-sandbox
+    - ROLE_NAME: molecule_sandbox
   matrix:
     - MOLECULE_DISTRO: centos:8
     - MOLECULE_DISTRO: centos:7
