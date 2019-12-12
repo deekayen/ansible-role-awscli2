@@ -1,2 +1,5 @@
 ---
-# tasks file for ansible-role-molecule-sandbox
+
+- name: Install httpd.
+  package:
+    name: httpd
