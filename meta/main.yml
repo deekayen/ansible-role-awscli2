@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: molecule-sandbox
+  role_name: molecule_sandbox
   author: David Norman
   description: Learn how to use Molecule with Ansible to do test driven development of new roles.
 
