@@ -13,11 +13,17 @@ galaxy_info:
   github_branch: master
 
   platforms:
+    - name: Debian
+      versions:
+        - 10
+        - 9
+        - 8
     - name: Ubuntu
       versions:
+        - eoan
         - bionic
         - xenial
-        - eoan
+        - trusty
 
   galaxy_tags:
     - molecule
