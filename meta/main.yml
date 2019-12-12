@@ -17,12 +17,10 @@ galaxy_info:
       versions:
         - buster
         - stretch
-        - jessie
     - name: Ubuntu
       versions:
         - bionic
         - xenial
-        - trusty
 
   galaxy_tags:
     - molecule

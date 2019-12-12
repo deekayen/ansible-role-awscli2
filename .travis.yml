@@ -1,19 +1,18 @@
 ---
 
 language: python
+os: linux
 dist: bionic
 services: docker
 
 env:
   global:
     - ROLE_NAME: molecule_sandbox
-  matrix:
+  jobs:
     - MOLECULE_DISTRO: ubuntu:bionic
     - MOLECULE_DISTRO: ubuntu:xenial
-    - MOLECULE_DISTRO: ubuntu:trusty
     - MOLECULE_DISTRO: debian:10
     - MOLECULE_DISTRO: debian:9
-    - MOLECULE_DISTRO: debian:8
 
 install:
   - pip install molecule docker
