@@ -1,6 +1,6 @@
 import os
+import http.client
 import testinfra.utils.ansible_runner
-import urllib.request
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
@@ -36,7 +36,9 @@ def test_apache2_service(host):
 
 
 def test_apache2_connection(host):
-    request = urllib.request.urlopen(host)
-    code = request.getcode()
+    connection = http.client.HTTPConnection(host, 80, timeout=10)
+    connection.request("GET", "/")
+    response = connection.getresponse()
+    code = response.status()
 
     assert code == "200"
