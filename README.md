@@ -28,7 +28,7 @@ passed in as parameters) is always nice for users too:
 
     - hosts: servers
       roles:
-         - deekayen.molecule-sandbox
+         - deekayen.molecule_sandbox
 
 License
 -------
