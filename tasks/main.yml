@@ -1,5 +1,6 @@
 ---
 
-- name: Install httpd.
+- name: Install nginx.
   package:
-    name: httpd
+    name: nginx
+  notify: start nginx
