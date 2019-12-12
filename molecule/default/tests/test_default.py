@@ -35,8 +35,12 @@ def test_apache2_service(host):
     assert service.is_running
 
 
+def test_apache2_port(host):
+    assert host.port(80).is_reachable
+
+
 def test_apache2_connection(host):
-    connection = http.client.HTTPConnection(host, 80, timeout=10)
+    connection = http.client.HTTPConnection(host.name, 80, timeout=5)
     connection.request("GET", "/")
     response = connection.getresponse()
     code = response.status()
