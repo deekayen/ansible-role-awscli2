@@ -1,7 +1,7 @@
 Molecule Sandbox
 =========
 
-[![Build Status](https://travis-ci.org/deekayen/ansible-role-molecule-sandbox.svg?branch=master)](https://travis-ci.org/deekayen/ansible-role-molecule-sandbox)
+[![Build Status](https://travis-ci.org/deekayen/ansible-role-molecule_sandbox.svg?branch=master)](https://travis-ci.org/deekayen/ansible-role-molecule_sandbox)
 
 Simple role to try Molecule tests with Ansible.
 
