@@ -37,14 +37,14 @@ def test_apache2_service(host):
 
 def test_apache2_port(host):
     ansible_vars = host.ansible.get_variables()
-    addr = host.addr(ansible_vars.inventory_hostname)
+    addr = host.addr(ansible_vars["inventory_hostname"])
 
     assert addr.port(80).is_reachable
 
 
 def test_apache2_connection(host):
     ansible_vars = host.ansible.get_variables()
-    name = ansible_vars.inventory_hostname
+    name = ansible_vars["inventory_hostname"]
 
     connection = http.client.HTTPConnection(name, 80, timeout=5)
     connection.request("GET", "/")
