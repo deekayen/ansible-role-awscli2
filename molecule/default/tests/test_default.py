@@ -24,6 +24,19 @@ def test_apache2_logs(host):
         assert log.is_file
 
 
+def test_apache2_config(host):
+    for filename in (
+        ("/etc/apache2/apache2.conf"),
+        ("/etc/apache2/sites-available/000-default.conf"),
+    ):
+        config = host.file(filename)
+        assert config.exists
+        assert config.is_file
+        assert config.user == "root"
+        assert config.uid == 0
+        assert oct(config.mode) == '0644'
+
+
 def test_apache2_listener(host):
     assert host.socket("tcp://0.0.0.0:80").is_listening
 
@@ -43,12 +56,9 @@ def test_apache2_port(host):
 
 
 def test_apache2_connection(host):
-    ansible_vars = host.ansible.get_variables()
-    name = ansible_vars["inventory_hostname"]
-
-    connection = http.client.HTTPConnection(name, 80, timeout=5)
+    connection = http.client.HTTPConnection("http://ddg.gg", 80, timeout=5)
     connection.request("GET", "/")
     response = connection.getresponse()
     code = response.status()
 
-    assert code == "200"
+    assert code == "301"
