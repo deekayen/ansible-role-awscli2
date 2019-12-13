@@ -61,4 +61,4 @@ def test_apache2_connection(host):
     response = connection.getresponse()
     code = response.status
 
-    assert code == "301"
+    assert code == 301
