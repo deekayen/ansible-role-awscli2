@@ -34,7 +34,7 @@ def test_apache2_config(host):
         assert config.is_file
         assert config.user == "root"
         assert config.uid == 0
-        assert oct(config.mode) == '0644'
+        assert config.mode == 0o644
 
 
 def test_apache2_listener(host):
@@ -56,7 +56,7 @@ def test_apache2_port(host):
 
 
 def test_apache2_connection(host):
-    connection = http.client.HTTPConnection("http://ddg.gg", 80, timeout=5)
+    connection = http.client.HTTPConnection("ddg.gg", 80, timeout=5)
     connection.request("GET", "/")
     response = connection.getresponse()
     code = response.status()
