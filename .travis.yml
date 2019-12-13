@@ -23,7 +23,7 @@ before_script:
   - cd deekayen.$ROLE_NAME
 
 script:
-  - molecule test
+  - molecule --debug test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
