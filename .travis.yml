@@ -16,12 +16,13 @@ addons:
     sources:
       - sourceline: 'deb https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
     packages:
+      - ansible-lint
       - docker
       - yamllint
     update: true
 
 install:
-  - pip install molecule yamllint ansible-lint docker
+  - pip install molecule docker
 
 before_script:
   - cd ../
