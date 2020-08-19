@@ -5,7 +5,7 @@
     src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
     dest: /tmp
     remote_src: yes
-    creates: /usr/local/bin/aws
+    creates: /tmp/aws
 
 - name: Run the installer.
   command:
