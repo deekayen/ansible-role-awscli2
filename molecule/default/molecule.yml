@@ -5,7 +5,7 @@ driver:
   name: docker
 lint: |
   set -e
-  pip install yamllint
+  find / -name yamllint -type f
   yamllint .
   ansible-lint
 platforms:
