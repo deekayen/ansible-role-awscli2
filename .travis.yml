@@ -8,8 +8,8 @@ env:
   global:
     - ROLE_NAME: awscli2
   matrix:
-    - MOLECULE_DISTRO: centos:8
-    - MOLECULE_DISTRO: centos:7
+    - MOLECULE_DISTRO: centos8
+    - MOLECULE_DISTRO: centos7
 
 before_install:
   # Upgrade Docker to work with docker-py.
