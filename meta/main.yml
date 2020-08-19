@@ -23,5 +23,4 @@ galaxy_info:
     - awscli
     - awscli2
 
-dependencies:
-  - deekayen.sponsor
+dependencies: []
