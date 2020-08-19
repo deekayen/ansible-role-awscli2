@@ -17,6 +17,10 @@ galaxy_info:
       versions:
         - 7
         - 8
+    - name: Debian
+      versions:
+        - buster
+        - stretch
 
   galaxy_tags:
     - aws

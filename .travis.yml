@@ -12,8 +12,6 @@ env:
     - MOLECULE_DISTRO: centos7
     - MOLECULE_DISTRO: debian9
     - MOLECULE_DISTRO: debian10
-    - MOLECULE_DISTRO: ubuntu1804
-    - MOLECULE_DISTRO: ubuntu2004
 
 addons:
   apt:
