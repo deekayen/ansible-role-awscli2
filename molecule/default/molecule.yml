@@ -5,8 +5,9 @@ driver:
   name: docker
 lint: |
   set -e
+  pip install yamllint
   yamllint .
-  ansible-lint --exclude library
+  ansible-lint
 platforms:
   - name: instance
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"

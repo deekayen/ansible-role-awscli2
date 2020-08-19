@@ -1,7 +1,7 @@
 ---
 
 language: python
-dist: bionic
+dist: focal
 services: docker
 
 env:
@@ -11,9 +11,13 @@ env:
     - MOLECULE_DISTRO: centos8
     - MOLECULE_DISTRO: centos7
 
-before_install:
-  # Upgrade Docker to work with docker-py.
-  - curl https://gist.githubusercontent.com/geerlingguy/ce883ad4aec6a5f1187ef93bd338511e/raw/36612d28981d92863f839c5aefe5b7dd7193d6c6/travis-ci-docker-upgrade.sh | sudo bash
+addons:
+  apt:
+    sources:
+      - sourceline: 'deb https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
+    packages:
+    - docker
+    update: true
 
 install:
   - pip install molecule yamllint ansible-lint docker
