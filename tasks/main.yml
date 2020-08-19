@@ -20,7 +20,7 @@
     var: aws_install
 
 - name: "Output AWS CLI version." # noqa 301
-  command: aws --version
+  command: /usr/local/bin/aws --version
   register: aws_version
 
 - name: Show AWS CLI version information.
