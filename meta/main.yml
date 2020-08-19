@@ -24,5 +24,4 @@ galaxy_info:
     - awscli2
 
 dependencies:
-  - src: git+https://github.com/deekayen/ansible-role-sponsor.git
-    name: deekayen.sponsor
+  - deekayen.sponsor
