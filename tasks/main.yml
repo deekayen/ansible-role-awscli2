@@ -17,7 +17,7 @@
 
 - name: "Show nstaller output."
   debug:
-    vars: aws_install
+    var: aws_install
 
 - name: "Output AWS CLI version." # noqa 301
   command: aws --version
