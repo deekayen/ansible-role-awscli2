@@ -3,8 +3,8 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
+lint: |
+  yamllint . && ansible-lint && flake8
 platforms:
   - name: instance
     image: "${MOLECULE_DISTRO}"
