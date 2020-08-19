@@ -1,6 +1,34 @@
 ---
 
-- name: Install apache2.
-  package:
-    name: apache2
-  notify: start apache2
+- name: Import gpg verification key.
+  gpg_import:
+    key: "0xa6310acc4672475c"
+  register: gpg_import
+
+- debug:
+    var: gpg_import
+
+- name: Download awscliv2 installer.
+  unarchive:
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /tmp
+    remote_src: yes
+    creates: /usr/local/bin/aws
+
+- name: Run the installer.
+  command:
+  args:
+    cmd: /tmp/aws/install
+    creates: /usr/local/bin/aws
+  become: true
+  register: aws_install
+
+- debug:
+    vars: aws_install
+
+- name: Output AWS CLI version.
+  command: aws --version
+  register: aws_version
+
+- debug:
+    var: aws_version

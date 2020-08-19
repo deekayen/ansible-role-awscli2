@@ -1,14 +1,14 @@
-Molecule Sandbox
+AWS CLI v2
 =========
 
-[![Build Status](https://travis-ci.org/deekayen/ansible-role-molecule_sandbox.svg?branch=master)](https://travis-ci.org/deekayen/ansible-role-molecule_sandbox)[![Project Status: Concept – Minimal or no implementation has been done yet, or the repository is only intended to be a limited example, demo, or proof-of-concept.](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
+[![Build Status](https://travis-ci.org/deekayen/ansible-role-awscli2.svg?branch=master)](https://travis-ci.org/deekayen/ansible-role-awscli2)
 
-Simple role to try Molecule tests with Ansible.
+Install AWS CLI v2 using the official install binary instead of using `pip`.
 
 Requirements
 ------------
 
-Travis CI
+Outbound internet connection.
 
 Role Variables
 --------------
@@ -18,7 +18,7 @@ None.
 Dependencies
 ------------
 
-Travis CI
+None.
 
 Example Playbook
 ----------------
@@ -28,7 +28,7 @@ passed in as parameters) is always nice for users too:
 
     - hosts: servers
       roles:
-         - deekayen.molecule_sandbox
+         - deekayen.awscli2
 
 License
 -------

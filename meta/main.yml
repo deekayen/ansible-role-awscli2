@@ -1,10 +1,10 @@
 ---
 galaxy_info:
-  role_name: molecule_sandbox
+  role_name: awscli2
   author: David Norman
-  description: Learn how to use Molecule with Ansible to do test driven development of new roles.
+  description: Install AWS CLI v2 using the official installer instead of pip.
 
-  issue_tracker_url: https://github.com/deekayen/ansible-role-molecule-sandbox/issues
+  issue_tracker_url: https://github.com/deekayen/ansible-role-awscli2/issues
 
   license: BSD
 
@@ -13,16 +13,16 @@ galaxy_info:
   github_branch: master
 
   platforms:
-    - name: Debian
+    - name: EL
       versions:
-        - buster
-        - stretch
-    - name: Ubuntu
-      versions:
-        - bionic
-        - xenial
+        - 7
+        - 8
 
   galaxy_tags:
-    - molecule
+    - aws
+    - awscli
+    - awscli2
 
-dependencies: []
+dependencies:
+  - src: git+https://github.com/deekayen/ansible-role-sponsor.git
+    name: deekayen.sponsor

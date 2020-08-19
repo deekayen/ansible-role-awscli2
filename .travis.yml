@@ -2,17 +2,15 @@
 
 language: python
 os: linux
-dist: bionic
+dist: focal
 services: docker
 
 env:
   global:
-    - ROLE_NAME: molecule_sandbox
+    - ROLE_NAME: awscli2
   jobs:
-    - MOLECULE_DISTRO: ubuntu:bionic
-    - MOLECULE_DISTRO: ubuntu:xenial
-    - MOLECULE_DISTRO: debian:10
-    - MOLECULE_DISTRO: debian:9
+    - MOLECULE_DISTRO: centos:8
+    - MOLECULE_DISTRO: centos:7
 
 install:
   - pip install molecule docker

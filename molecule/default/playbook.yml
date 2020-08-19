@@ -4,10 +4,10 @@
   become: true
 
   pre_tasks:
-    - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
-      when: ansible_os_family == 'Debian'
+    - name: Install unzip.
+      package:
+        name: unzip
       changed_when: false
 
   roles:
-    - role: deekayen.molecule_sandbox
+    - role: deekayen.awscli2
