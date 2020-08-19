@@ -5,7 +5,8 @@ driver:
   name: docker
 lint: |
   set -e
-  /usr/bin/yamllint .
+  /usr/bin/yamllint . &&
+  ansible-lint
 platforms:
   - name: instance
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"

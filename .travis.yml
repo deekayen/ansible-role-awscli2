@@ -16,8 +16,8 @@ addons:
     sources:
       - sourceline: 'deb https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
     packages:
-    - docker
-    - yamllint
+      - docker
+      - yamllint
     update: true
 
 install:
