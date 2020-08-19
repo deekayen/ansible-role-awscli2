@@ -13,7 +13,7 @@ env:
     - MOLECULE_DISTRO: centos:7
 
 install:
-  - pip install molecule docker
+  - pip install ansible-lint molecule docker
 
 before_script:
   - cd ../
