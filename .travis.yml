@@ -8,12 +8,12 @@ services: docker
 env:
   global:
     - ROLE_NAME: awscli2
-  jobs:
+  matrix:
     - MOLECULE_DISTRO: centos:8
     - MOLECULE_DISTRO: centos:7
 
 install:
-  - pip3 install ansible-lint molecule docker
+  - pip install ansible-lint docker molecule yamllint
 
 before_script:
   - cd ../
