@@ -1,14 +1,5 @@
 ---
 
-- name: Import gpg verification key.
-  gpg_import:
-    key: "0xa6310acc4672475c"
-  register: gpg_import
-
-- name: Show GnuPG import information.
-  debug:
-    var: gpg_import
-
 - name: Download awscliv2 installer.
   unarchive:
     src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
