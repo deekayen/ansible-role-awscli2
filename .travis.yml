@@ -2,7 +2,6 @@
 
 language: python
 os: linux
-dist: focal
 services: docker
 
 env:
