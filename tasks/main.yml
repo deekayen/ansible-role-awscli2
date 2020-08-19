@@ -5,7 +5,8 @@
     key: "0xa6310acc4672475c"
   register: gpg_import
 
-- debug:
+- name: Show GnuPG import information.
+  debug:
     var: gpg_import
 
 - name: Download awscliv2 installer.
@@ -23,12 +24,14 @@
   become: true
   register: aws_install
 
-- debug:
+- name: "Show nstaller output."
+  debug:
     vars: aws_install
 
-- name: Output AWS CLI version.
+- name: "Output AWS CLI version." # noqa 301
   command: aws --version
   register: aws_version
 
-- debug:
+- name: Show AWS CLI version information.
+  debug:
     var: aws_version
