@@ -15,6 +15,7 @@
   become: true
   register: aws_install
 
-- name: "Show nstaller output."
+- name: "Show installer output."
   debug:
     var: aws_install
+    verbosity: 2
