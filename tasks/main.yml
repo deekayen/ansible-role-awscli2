@@ -6,7 +6,7 @@
     dest: /tmp
     remote_src: yes
     creates: /tmp/aws
-    mode: preserve
+    mode: 0755
 
 - name: Run the installer.
   command:
