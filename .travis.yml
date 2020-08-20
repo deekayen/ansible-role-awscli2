@@ -20,6 +20,7 @@ addons:
     packages:
       - ansible-lint
       - docker
+      - flake8
       - yamllint
     update: true
 
