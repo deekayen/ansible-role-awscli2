@@ -1,5 +1,4 @@
 import os
-import http.client
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
@@ -12,5 +11,3 @@ def test_awscli2_bin(host):
     assert host.file("/usr/local/bin/aws").is_symlink
     assert host.file("/usr/local/bin/aws_completer").is_symlink
     assert host.file("/usr/local/aws-cli/v2/current/bin/aws").is_file
-
-
