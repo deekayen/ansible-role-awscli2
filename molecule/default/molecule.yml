@@ -22,6 +22,3 @@ provisioner:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 verifier:
   name: testinfra
-  enabled: True
-  options:
-    p: no:pytest-ansible

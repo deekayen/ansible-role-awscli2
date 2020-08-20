@@ -25,7 +25,7 @@ addons:
     update: true
 
 install:
-  - pip install molecule docker
+  - pip install --upgrade --upgrade-strategy eager -r requirements.txt
 
 before_script:
   - cd ../

@@ -1,0 +1,9 @@
+molecule
+ansible
+ansible-lint
+flake8
+flake8-docstrings
+yamllint
+testinfra
+docker
+jmespath
