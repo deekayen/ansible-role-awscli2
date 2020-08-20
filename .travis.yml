@@ -18,10 +18,7 @@ addons:
     sources:
       - sourceline: 'deb https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable'
     packages:
-      - ansible-lint
       - docker
-      - flake8
-      - yamllint
     update: true
 
 install:
