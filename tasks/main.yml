@@ -11,7 +11,7 @@
 - name: Run the installer.
   command:
   args:
-    cmd: "{{ executable_temp_dir | default('/tmp') }}"/aws/install
+    cmd: "{{ executable_temp_dir | default('/tmp') }}/aws/install"
     creates: /usr/local/bin/aws
   become: true
   register: aws_install
