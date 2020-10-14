@@ -4,6 +4,7 @@ galaxy_info:
   author: David Norman
   description: Install AWS CLI v2 using the official installer instead of pip.
 
+  github_branch: main
   issue_tracker_url: https://github.com/deekayen/ansible-role-awscli2/issues
 
   license: BSD
