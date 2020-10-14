@@ -31,7 +31,7 @@ jobs:
       - name: Install test dependencies.
         run: pip install --upgrade --upgrade-strategy eager -r requirements.txt
 
-      - name: Rename repo folder to a proper galaxy alias.
+      - name: Link repo folder to a proper galaxy alias.
         run: cd ../ && ln -s ansible-role-awscli2 deekayen.awscli2 && cd ansible-role-awscli2
 
       - name: Run Molecule tests.
