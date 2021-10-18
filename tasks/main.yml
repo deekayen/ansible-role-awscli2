@@ -3,15 +3,15 @@
 - name: Download awscliv2 installer.
   unarchive:
     src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-    dest: "{{ executable_temp_dir | default('/tmp') }}"
+    dest: "{{ executable_temp_dir }}"
     remote_src: yes
-    creates: /tmp/aws
+    creates: '{{ executable_temp_dir }}/aws'
     mode: 0755
 
 - name: Run the installer.
   command:
   args:
-    cmd: "{{ executable_temp_dir | default('/tmp') }}/aws/install"
+    cmd: "{{ executable_temp_dir }}/aws/install"
     creates: /usr/local/bin/aws
   become: true
   register: aws_install
