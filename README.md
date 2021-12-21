@@ -13,7 +13,9 @@ Requirements
 Role Variables
 --------------
 
-None.
+| variable | hints |
+| ---      | ---   |
+| executable_temp_dir | download location for the installer, must be executable, don't use /tmp on hardened OSes|
 
 Dependencies
 ------------
