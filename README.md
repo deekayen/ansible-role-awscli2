@@ -7,8 +7,8 @@ Install AWS CLI v2 using the official install binary instead of using `pip`.
 
 Requirements
 ------------
-
-Outbound internet connection.
+1. Outbound internet connection.
+2. unzip 
 
 Role Variables
 --------------
