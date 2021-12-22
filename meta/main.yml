@@ -1,6 +1,7 @@
 ---
 galaxy_info:
-  role_name: deekayen.awscli2
+  namespace: deekayen
+  role_name: awscli2
   author: David Norman
   description: Install AWS CLI v2 using the official installer instead of pip.
 
