@@ -1,4 +1,23 @@
 ---
+- name: Update apt cache.
+  apt:
+    update_cache: true
+  when: ansible_distribution == 'Debian'
+
+- name: Update yum cache.
+  ansible.builtin.dnf:
+    update_cache: true
+  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version >= 8"
+
+- name: Update yum cache.
+  ansible.builtin.dnf:
+    update_cache: true
+    use_backend: yum
+  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version <= 7"
+
+- name: Install unzip.
+  package:
+    name: unzip
 
 # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 - name: Download awscliv2 installer.
@@ -7,7 +26,7 @@
     dest: "{{ executable_temp_dir }}"
     remote_src: true
     creates: '{{ executable_temp_dir }}/aws'
-    mode: 0755
+    mode: "0755"
 
 - name: Run the installer.
   command:

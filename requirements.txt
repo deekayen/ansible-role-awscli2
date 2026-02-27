@@ -6,3 +6,4 @@ yamllint
 pytest-testinfra
 docker
 jmespath
+python3-dnf
