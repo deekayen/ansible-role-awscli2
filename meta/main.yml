@@ -8,23 +8,24 @@ galaxy_info:
   github_branch: main
   issue_tracker_url: https://github.com/deekayen/ansible-role-awscli2/issues
 
-  license: BSD
-
-  min_ansible_version: 1.2
+  license: BSD-3-Clause
+  min_ansible_version: "2.15"
 
   platforms:
     - name: EL
       versions:
-        - 7
-        - 8
+        - "8"
+        - "9"
     - name: Debian
       versions:
-        - buster
-        - stretch
+        - bullseye
+        - bookworm
 
   galaxy_tags:
     - aws
     - awscli
     - awscli2
+    - cloud
+    - amazon
 
 dependencies: []

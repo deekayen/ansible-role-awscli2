@@ -1,0 +1,19 @@
+---
+argument_specs:
+  main:
+    short_description: Install AWS CLI v2 using the official installer instead of pip.
+    description:
+      - Downloads the official AWS CLI v2 installer archive from Amazon,
+        unpacks it to a temporary directory, and runs the bundled installer
+        to place the CLI under /usr/local/aws-cli with symlinks in
+        /usr/local/bin.
+    author:
+      - David Norman
+    options:
+      executable_temp_dir:
+        type: path
+        default: /tmp
+        description: >-
+          Download and unpack location for the AWS CLI v2 installer. The
+          filesystem must allow execution; do not use /tmp on hardened
+          systems where it is mounted noexec.

@@ -1,42 +1,41 @@
 ---
+- name: Validate role variables.
+  ansible.builtin.import_tasks: assert.yml
+  tags:
+    - always
+
 - name: Update apt cache.
-  apt:
+  ansible.builtin.apt:
     update_cache: true
   when: ansible_distribution == 'Debian'
 
-- name: Update yum cache.
+- name: Update dnf cache.
   ansible.builtin.dnf:
     update_cache: true
-  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version >= 8"
-
-- name: Update yum cache.
-  ansible.builtin.dnf:
-    update_cache: true
-    use_backend: yum
-  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version <= 7"
+  when: ansible_os_family == 'RedHat'
 
 - name: Install unzip.
-  package:
+  ansible.builtin.package:
     name: unzip
+    state: present
 
 # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 - name: Download awscliv2 installer.
-  unarchive:
+  ansible.builtin.unarchive:
     src: "https://awscli.amazonaws.com/awscli-exe-linux-{{ ansible_architecture }}.zip"
     dest: "{{ executable_temp_dir }}"
     remote_src: true
-    creates: '{{ executable_temp_dir }}/aws'
+    creates: "{{ executable_temp_dir }}/aws"
     mode: "0755"
 
 - name: Run the installer.
-  command:
-  args:
+  ansible.builtin.command:
     cmd: "{{ executable_temp_dir }}/aws/install"
     creates: /usr/local/bin/aws
   become: true
   register: aws_install
 
-- name: "Show installer output."
-  debug:
+- name: Show installer output.
+  ansible.builtin.debug:
     var: aws_install
     verbosity: 2

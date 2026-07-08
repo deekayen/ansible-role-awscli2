@@ -1,13 +1,8 @@
 ---
+
 - name: Converge
   hosts: all
   become: true
 
-  pre_tasks:
-    - name: Install unzip.
-      package:
-        name: unzip
-      changed_when: false
-
   roles:
-    - role: deekayen.awscli2
+    - deekayen.awscli2

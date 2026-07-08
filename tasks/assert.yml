@@ -1,0 +1,7 @@
+---
+- name: Assert executable_temp_dir is an absolute path.
+  ansible.builtin.assert:
+    that:
+      - executable_temp_dir is match('^/')
+    fail_msg: "executable_temp_dir must be an absolute path, got: {{ executable_temp_dir }}"
+    quiet: true

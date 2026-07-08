@@ -1,0 +1,42 @@
+---
+- name: Verify
+  hosts: all
+  become: true
+  tasks:
+    - name: Stat the aws symlink in /usr/local/bin.
+      ansible.builtin.stat:
+        path: /usr/local/bin/aws
+      register: aws_bin
+
+    - name: Stat the aws_completer symlink in /usr/local/bin.
+      ansible.builtin.stat:
+        path: /usr/local/bin/aws_completer
+      register: aws_completer_bin
+
+    - name: Stat the versioned aws binary.
+      ansible.builtin.stat:
+        path: /usr/local/aws-cli/v2/current/bin/aws
+        follow: true
+      register: aws_versioned_bin
+
+    - name: Assert the AWS CLI v2 binaries are installed.
+      ansible.builtin.assert:
+        that:
+          - aws_bin.stat.exists
+          - aws_bin.stat.islnk
+          - aws_completer_bin.stat.exists
+          - aws_completer_bin.stat.islnk
+          - aws_versioned_bin.stat.exists
+          - aws_versioned_bin.stat.isreg
+        fail_msg: AWS CLI v2 is not installed as expected under /usr/local.
+
+    - name: Run aws --version.
+      ansible.builtin.command: /usr/local/bin/aws --version
+      register: aws_version
+      changed_when: false
+
+    - name: Assert aws reports version 2.
+      ansible.builtin.assert:
+        that:
+          - aws_version.stdout is match('aws-cli/2\.')
+        fail_msg: "Expected aws-cli/2.x, got: {{ aws_version.stdout }}"
