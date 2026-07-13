@@ -49,19 +49,25 @@ jobs:
         if: matrix.distro == 'amazonlinux2023'
         continue-on-error: true
         run: |
+          set +e
           CID=$(docker ps -aq --filter name=instance)
           echo "container: $CID"
           docker exec "$CID" sh -c 'uname -m; cat /etc/os-release | head -3'
           echo "=== machine-id ==="
-          docker exec "$CID" sh -c 'cat /etc/machine-id 2>&1 || echo MISSING'
+          docker exec "$CID" sh -c 'cat /etc/machine-id; echo "exit=$?"'
           echo "=== sudo -n whoami (as root) ==="
-          docker exec "$CID" sh -c 'sudo -n whoami 2>&1'
+          docker exec "$CID" sh -c 'sudo -n whoami; echo "exit=$?"'
           echo "=== systemctl is-system-running ==="
-          docker exec "$CID" sh -c 'systemctl is-system-running 2>&1 || true'
+          docker exec "$CID" sh -c 'systemctl is-system-running; echo "exit=$?"'
           echo "=== pam.d/sudo ==="
-          docker exec "$CID" sh -c 'cat /etc/pam.d/sudo 2>&1'
+          docker exec "$CID" sh -c 'cat /etc/pam.d/sudo; echo "exit=$?"'
+          echo "=== nsswitch.conf ==="
+          docker exec "$CID" sh -c 'cat /etc/nsswitch.conf; echo "exit=$?"'
+          echo "=== id root ==="
+          docker exec "$CID" sh -c 'id root; getent passwd root; echo "exit=$?"'
           echo "=== journalctl (last 40 lines) ==="
-          docker exec "$CID" sh -c 'journalctl --no-pager -n 40 2>&1 || true'
+          docker exec "$CID" sh -c 'journalctl --no-pager -n 40; echo "exit=$?"'
+          echo "diagnostic step complete"
 
       - name: Destroy the diagnostic instance.
         if: matrix.distro == 'amazonlinux2023'
