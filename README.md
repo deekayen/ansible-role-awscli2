@@ -13,9 +13,11 @@ Requirements
 Role Variables
 --------------
 
-| variable | hints |
-| ---      | ---   |
-| executable_temp_dir | download location for the installer, must be executable, don't use /tmp on hardened OSes|
+| variable | type | required | default | description |
+| --- | --- | --- | --- | --- |
+| `executable_temp_dir` | str | no | `/tmp` | Download location for the installer. Must be executable; don't use `/tmp` on hardened OSes that mount it noexec. |
+
+Validated automatically via `meta/argument_specs.yml` before the role runs.
 
 Dependencies
 ------------
