@@ -25,7 +25,7 @@ platforms:
     # CI run; doesn't reproduce on hosts without AppArmor (e.g. Docker
     # Desktop for Mac), which is why this only broke real CI.
     security_opts:
-      - apparmor:unconfined
+      - apparmor=unconfined
 provisioner:
   name: ansible
   env:
