@@ -34,6 +34,41 @@ jobs:
       - name: Install test dependencies.
         run: pip install --upgrade --upgrade-strategy eager -r requirements.txt
 
+      # TEMPORARY: doesn't reproduce on my local (arm64) Mac at all - 3/3
+      # local runs passed. Real CI is amd64, so this diagnoses whatever's
+      # actually different about sudo/PAM on that architecture's image build
+      # before landing a real fix. Remove once resolved.
+      - name: Create instance and probe sudo/PAM directly.
+        if: matrix.distro == 'amazonlinux2023'
+        run: |
+          molecule create
+        env:
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+
+      - name: Diagnose sudo/PAM in the running container.
+        if: matrix.distro == 'amazonlinux2023'
+        continue-on-error: true
+        run: |
+          CID=$(docker ps -aq --filter name=instance)
+          echo "container: $CID"
+          docker exec "$CID" sh -c 'uname -m; cat /etc/os-release | head -3'
+          echo "=== machine-id ==="
+          docker exec "$CID" sh -c 'cat /etc/machine-id 2>&1 || echo MISSING'
+          echo "=== sudo -n whoami (as root) ==="
+          docker exec "$CID" sh -c 'sudo -n whoami 2>&1'
+          echo "=== systemctl is-system-running ==="
+          docker exec "$CID" sh -c 'systemctl is-system-running 2>&1 || true'
+          echo "=== pam.d/sudo ==="
+          docker exec "$CID" sh -c 'cat /etc/pam.d/sudo 2>&1'
+          echo "=== journalctl (last 40 lines) ==="
+          docker exec "$CID" sh -c 'journalctl --no-pager -n 40 2>&1 || true'
+
+      - name: Destroy the diagnostic instance.
+        if: matrix.distro == 'amazonlinux2023'
+        run: molecule destroy
+        env:
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+
       - name: Run Molecule tests.
         run: molecule test
         env:
