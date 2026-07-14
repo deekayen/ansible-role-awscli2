@@ -34,6 +34,14 @@ jobs:
       - name: Install test dependencies.
         run: pip install --upgrade --upgrade-strategy eager -r requirements.txt
 
+      # unix-chkpwd is a host-loaded, path-attached AppArmor profile - the
+      # kernel transitions any exec of /usr/sbin/unix_chkpwd into it
+      # regardless of the container's own confinement, so a container-level
+      # apparmor=unconfined security_opt can't touch it. Unload it on the
+      # runner host itself before sudo-in-container is ever attempted.
+      - name: Unload the host's unix-chkpwd AppArmor profile.
+        run: sudo apparmor_parser -R /etc/apparmor.d/unix-chkpwd || true
+
       # TEMPORARY: doesn't reproduce on my local (arm64) Mac at all - 3/3
       # local runs passed. Real CI is amd64, so this diagnoses whatever's
       # actually different about sudo/PAM on that architecture's image build
