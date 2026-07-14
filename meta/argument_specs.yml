@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Install AWS CLI v2 using the official installer instead of pip.
+    options:
+      executable_temp_dir:
+        type: str
+        required: false
+        default: /tmp
+        description: >-
+          Download location for the installer. Must be executable;
+          don't use /tmp on hardened OSes that mount it noexec.

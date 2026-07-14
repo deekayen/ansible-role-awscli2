@@ -12,27 +12,35 @@ jobs:
     name: Molecule
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         distro:
-          - centos7
-          - centos8
-          - debian9
-          - debian10
+          # amazonlinux2023 is the required check (Datavant's standard EL
+          # target); debian13 exercises the role's actual Debian-only apt
+          # cache branch in tasks/main.yml, which ubuntu wouldn't hit since
+          # ansible_distribution there is "Ubuntu", not "Debian".
+          - amazonlinux2023
+          - debian13
 
     steps:
       - name: Check out the codebase.
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
       - name: Set up Python 3.
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.x'
+          python-version: '3.12'
 
       - name: Install test dependencies.
         run: pip install --upgrade --upgrade-strategy eager -r requirements.txt
 
-      - name: Link repo folder to a proper galaxy alias.
-        run: cd ../ && ln -s ansible-role-awscli2 deekayen.awscli2 && cd ansible-role-awscli2
+      # unix-chkpwd is a host-loaded, path-attached AppArmor profile - the
+      # kernel transitions any exec of /usr/sbin/unix_chkpwd into it
+      # regardless of the container's own confinement, so a container-level
+      # apparmor=unconfined security_opt can't touch it. Unload it on the
+      # runner host itself before sudo-in-container is ever attempted.
+      - name: Unload the host's unix-chkpwd AppArmor profile.
+        run: sudo apparmor_parser -R /etc/apparmor.d/unix-chkpwd || true
 
       - name: Run Molecule tests.
         run: molecule test

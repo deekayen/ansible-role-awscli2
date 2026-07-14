@@ -1,6 +1,16 @@
 ---
+# Kept in sync with what ansible-lint's "production" profile requires -
+# ansible-lint refuses to run its own yaml checks if this file disagrees.
 extends: default
 rules:
   line-length:
     max: 150
     level: warning
+  braces:
+    max-spaces-inside: 1
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: false
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true

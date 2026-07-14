@@ -1,13 +1,18 @@
 ---
+# No play-level become: true - the docker connection already execs as root
+# in these test images, and a no-op sudo call breaks amazonlinux2023's
+# minimal PAM stack ("sudo: PAM account management error"). The role's own
+# task-level become: true (tasks/main.yml, "Run the installer") is real
+# production behavior for non-root target hosts and stays as-is; it's a
+# separate question whether it survives contact with this same test image.
 - name: Converge
   hosts: all
-  become: true
 
   pre_tasks:
     - name: Install unzip.
-      package:
+      ansible.builtin.package:
         name: unzip
       changed_when: false
 
   roles:
-    - role: deekayen.awscli2
+    - role: ansible-role-awscli2

@@ -1,27 +1,27 @@
 ---
 - name: Update apt cache.
-  apt:
+  ansible.builtin.apt:
     update_cache: true
   when: ansible_distribution == 'Debian'
 
 - name: Update yum cache.
   ansible.builtin.dnf:
     update_cache: true
-  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version >= 8"
+  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version | int >= 8"
 
 - name: Update yum cache.
   ansible.builtin.dnf:
     update_cache: true
     use_backend: yum
-  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version <= 7"
+  when: "ansible_os_family == 'RedHat' and ansible_distribution_major_version | int <= 7"
 
 - name: Install unzip.
-  package:
+  ansible.builtin.package:
     name: unzip
 
 # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 - name: Download awscliv2 installer.
-  unarchive:
+  ansible.builtin.unarchive:
     src: "https://awscli.amazonaws.com/awscli-exe-linux-{{ ansible_architecture }}.zip"
     dest: "{{ executable_temp_dir }}"
     remote_src: true
@@ -29,7 +29,7 @@
     mode: "0755"
 
 - name: Run the installer.
-  command:
+  ansible.builtin.command:
   args:
     cmd: "{{ executable_temp_dir }}/aws/install"
     creates: /usr/local/bin/aws
@@ -37,6 +37,6 @@
   register: aws_install
 
 - name: "Show installer output."
-  debug:
+  ansible.builtin.debug:
     var: aws_install
     verbosity: 2
