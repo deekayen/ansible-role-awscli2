@@ -42,47 +42,6 @@ jobs:
       - name: Unload the host's unix-chkpwd AppArmor profile.
         run: sudo apparmor_parser -R /etc/apparmor.d/unix-chkpwd || true
 
-      # TEMPORARY: doesn't reproduce on my local (arm64) Mac at all - 3/3
-      # local runs passed. Real CI is amd64, so this diagnoses whatever's
-      # actually different about sudo/PAM on that architecture's image build
-      # before landing a real fix. Remove once resolved.
-      - name: Create instance and probe sudo/PAM directly.
-        if: matrix.distro == 'amazonlinux2023'
-        run: |
-          molecule create
-        env:
-          MOLECULE_DISTRO: ${{ matrix.distro }}
-
-      - name: Diagnose sudo/PAM in the running container.
-        if: matrix.distro == 'amazonlinux2023'
-        continue-on-error: true
-        run: |
-          set +e
-          CID=$(docker ps -aq --filter name=instance)
-          echo "container: $CID"
-          docker exec "$CID" sh -c 'uname -m; cat /etc/os-release | head -3'
-          echo "=== machine-id ==="
-          docker exec "$CID" sh -c 'cat /etc/machine-id; echo "exit=$?"'
-          echo "=== sudo -n whoami (as root) ==="
-          docker exec "$CID" sh -c 'sudo -n whoami; echo "exit=$?"'
-          echo "=== systemctl is-system-running ==="
-          docker exec "$CID" sh -c 'systemctl is-system-running; echo "exit=$?"'
-          echo "=== pam.d/sudo ==="
-          docker exec "$CID" sh -c 'cat /etc/pam.d/sudo; echo "exit=$?"'
-          echo "=== nsswitch.conf ==="
-          docker exec "$CID" sh -c 'cat /etc/nsswitch.conf; echo "exit=$?"'
-          echo "=== id root ==="
-          docker exec "$CID" sh -c 'id root; getent passwd root; echo "exit=$?"'
-          echo "=== journalctl (last 40 lines) ==="
-          docker exec "$CID" sh -c 'journalctl --no-pager -n 40; echo "exit=$?"'
-          echo "diagnostic step complete"
-
-      - name: Destroy the diagnostic instance.
-        if: matrix.distro == 'amazonlinux2023'
-        run: molecule destroy
-        env:
-          MOLECULE_DISTRO: ${{ matrix.distro }}
-
       - name: Run Molecule tests.
         run: molecule test
         env:

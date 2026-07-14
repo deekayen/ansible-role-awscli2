@@ -17,15 +17,6 @@ platforms:
     cgroupns_mode: host
     privileged: true
     pre_build_image: true
-    # GitHub Actions ubuntu-latest runners have AppArmor enforcing on the
-    # host, which confines unix_chkpwd (PAM's account-check helper for
-    # sudo) even inside a privileged container - denies dac_read_search/
-    # dac_override, so sudo can't read /etc/shadow and fails with "PAM
-    # account management error". Confirmed via kernel audit log on a live
-    # CI run; doesn't reproduce on hosts without AppArmor (e.g. Docker
-    # Desktop for Mac), which is why this only broke real CI.
-    security_opts:
-      - apparmor=unconfined
 provisioner:
   name: ansible
   env:
