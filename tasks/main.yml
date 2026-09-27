@@ -7,7 +7,7 @@
 - name: Update apt cache.
   ansible.builtin.apt:
     update_cache: true
-  when: ansible_distribution == 'Debian'
+  when: ansible_os_family == 'Debian'
 
 - name: Update dnf cache.
   ansible.builtin.dnf:

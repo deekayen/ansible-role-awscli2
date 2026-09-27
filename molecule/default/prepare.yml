@@ -1,0 +1,13 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+    # EL-family images ship /etc/shadow as mode 0000. On Ubuntu Docker hosts
+    # (GitHub runners) AppArmor denies unix_chkpwd the DAC override it needs
+    # to read it, so sudo and become fail. Only touch images that are 0000.
+    # https://github.com/geerlingguy/docker-rockylinux9-ansible/issues/6
+    - name: Make /etc/shadow readable by root so become works.
+      ansible.builtin.raw: >-
+        [ "$(stat -c %a /etc/shadow)" != 0 ] || chmod 0400 /etc/shadow
+      changed_when: false

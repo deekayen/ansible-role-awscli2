@@ -21,10 +21,13 @@ jobs:
           python-version: '3.12'
 
       - name: Install test dependencies.
-        run: pip3 install ansible-lint
+        run: pip3 install ansible-lint flake8
 
       - name: Lint code.
         run: ansible-lint --profile production
+
+      - name: Lint Python tests.
+        run: flake8 molecule/
 
   molecule:
     name: Molecule
@@ -33,7 +36,13 @@ jobs:
       matrix:
         distro:
           - rockylinux9
+          - rockylinux10
+          - amazonlinux2023
+          - ubuntu2204
+          - ubuntu2404
+          - ubuntu2604
           - debian12
+          - debian13
 
     steps:
       - name: Check out the codebase.
@@ -45,7 +54,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install test dependencies.
-        run: pip3 install ansible-core molecule molecule-plugins[docker] docker
+        run: pip3 install ansible-core molecule molecule-plugins[docker] docker pytest-testinfra
 
       - name: Run Molecule tests.
         run: molecule test
