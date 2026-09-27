@@ -7,12 +7,12 @@
 - name: Update apt cache.
   ansible.builtin.apt:
     update_cache: true
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts.os_family == 'Debian'
 
 - name: Update dnf cache.
   ansible.builtin.dnf:
     update_cache: true
-  when: ansible_os_family == 'RedHat'
+  when: ansible_facts.os_family == 'RedHat'
 
 - name: Install unzip.
   ansible.builtin.package:
@@ -22,7 +22,7 @@
 # https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 - name: Download awscliv2 installer.
   ansible.builtin.unarchive:
-    src: "https://awscli.amazonaws.com/awscli-exe-linux-{{ ansible_architecture }}.zip"
+    src: "https://awscli.amazonaws.com/awscli-exe-linux-{{ ansible_facts.architecture }}.zip"
     dest: "{{ executable_temp_dir }}"
     remote_src: true
     creates: "{{ executable_temp_dir }}/aws"
